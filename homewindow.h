@@ -13,6 +13,7 @@ class HomeWindow : public QMainWindow {
         explicit HomeWindow(QWidget *parent = 0);
         ~HomeWindow();
     public slots:
+        void handleDirSelectButton();
         void handleScanButton();
         void handleQuitButton();
     private:
