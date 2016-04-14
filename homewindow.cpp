@@ -19,7 +19,7 @@ HomeWindow::~HomeWindow() {
 void HomeWindow::handleDirSelectButton() {
     QString dialog = QFileDialog::getExistingDirectory(this, tr("Pick a Git repo"), "/");
     ui->dirEntryButton->setText(dialog);
-    ui->scanNowButton->setEnabled(true);
+    ui->scanNowButton->setEnabled(dialog != "");
 }
 
 void HomeWindow::handleScanButton() {
