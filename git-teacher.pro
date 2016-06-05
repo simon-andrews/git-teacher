@@ -16,10 +16,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         homewindow.cpp \
     messages.cpp \
-    git.cpp
+    git.cpp \
+    scanning.cpp
 
 HEADERS  += homewindow.h \
     messages.h \
-    git.h
+    git.h \
+    scanning.h
 
 FORMS    += homewindow.ui
