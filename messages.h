@@ -4,5 +4,6 @@
 #include <QString>
 
 void info(QString message);
+void warn(QString message);
 
 #endif // MESSAGES_H

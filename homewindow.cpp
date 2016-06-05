@@ -3,6 +3,7 @@
 #include "homewindow.h"
 #include "messages.h"
 #include <QFileDialog>
+#include "scanning.h"
 #include "ui_homewindow.h"
 
 HomeWindow::HomeWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::HomeWindow) {
@@ -26,7 +27,7 @@ void HomeWindow::handleScanButton() {
     ui->progressBar->setEnabled(true);
     const char* path = ui->dirEntryButton->text().toLatin1().data();
     git_repository* repo = get_repo(path);
-    info("Congrats on getting this far! Sadly, this program isn't ready yet :(");
+    scan(repo);
     git_repository_free(repo);
 }
 
