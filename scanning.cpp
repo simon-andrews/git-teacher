@@ -2,12 +2,13 @@
 #include "messages.h"
 
 git_repository* repo;
-int error_count = 0;
+int error_count;
 
 //function prototypes
 void check_is_shallow();
 
 void scan(git_repository* repository) {
+    error_count = 0;
     repo = repository;
     check_is_shallow();
     info(QString("<p>Scan complete! Thanks for using git-teacher!</p><p>There were potential %1 problems found.</p>").arg(QString::number(error_count)));
