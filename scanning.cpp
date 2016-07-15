@@ -3,14 +3,22 @@
 
 git_repository* repo;
 int error_count;
+int branchcount;
 
 //function prototypes
 void check_is_shallow();
+void check_master_exists();
 
 void scan(git_repository* repository) {
     error_count = 0;
     repo = repository;
+
+    //check the repo (general stuff)
     check_is_shallow();
+
+    //check branches
+    check_master_exists();
+
     info(QString("<p>Scan complete! Thanks for using git-teacher!</p><p>There were potential %1 problems found.</p>").arg(QString::number(error_count)));
 }
 
@@ -27,4 +35,19 @@ void check_is_shallow() {
              "<p>You're probably going to want to reclone, but make sure to leave off the <code>--depth</code> flag this time!</p>");
         error_count++;
     }
+}
+
+/*
+ * Makes sure the repository has a master branch
+ */
+void check_master_exists() {
+    git_reference* ref;
+    if(git_reference_dwim(&ref, repo, "master") != 0) {
+        warn("<p><b>No master branch found.</b></p>"
+             "<p>For some reason, you don't have a master branch in your repository. The master branch is usually the main branch that the others are based off of.</p>"
+             "<p>While this isn't <em>necessarily</em> a bad thing, chances are you want a master branch.</p>"
+             "<p>You can create a master branch with <code>git checkout -b master</code>.");
+        error_count++;
+    }
+    git_reference_free(ref);
 }
